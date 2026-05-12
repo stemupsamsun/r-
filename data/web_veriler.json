@@ -1,0 +1,341 @@
+[
+  {
+    "tarih": "2026-04-27 18:11",
+    "zorluk": "Orta",
+    "mod": 0,
+    "ad": "Efe",
+    "yas": "14",
+    "cinsiyet": "Erkek",
+    "ortalama": 534.2,
+    "en_hizli": 1,
+    "en_yavas": 156,
+    "sinif": "Pek İyi",
+    "denemeler": [
+      [
+        1,
+        1038
+      ],
+      [
+        2,
+        -1
+      ],
+      [
+        3,
+        290
+      ],
+      [
+        4,
+        208
+      ],
+      [
+        5,
+        215
+      ],
+      [
+        6,
+        920
+      ],
+      [
+        7,
+        -1
+      ],
+      [
+        8,
+        -1
+      ],
+      [
+        9,
+        -1
+      ],
+      [
+        10,
+        -1
+      ]
+    ]
+  },
+  {
+    "tarih": "2026-04-28 17:32",
+    "zorluk": "Orta",
+    "mod": 0,
+    "ad": "Erva",
+    "yas": "11",
+    "cinsiyet": "Kadın",
+    "ortalama": 263,
+    "en_hizli": 250,
+    "en_yavas": 290,
+    "sinif": "İyi",
+    "denemeler": [
+      [
+        1,
+        361
+      ],
+      [
+        2,
+        -3
+      ],
+      [
+        3,
+        612
+      ],
+      [
+        4,
+        340
+      ],
+      [
+        5,
+        -3
+      ]
+    ]
+  },
+  {
+    "tarih": "2026-04-28 17:36",
+    "zorluk": "Orta",
+    "mod": 0,
+    "ad": "Özlem",
+    "yas": "19",
+    "cinsiyet": "Kadın",
+    "ortalama": 237.4,
+    "en_hizli": 213,
+    "en_yavas": 258,
+    "sinif": "Iyi",
+    "denemeler": [
+      [
+        1,
+        213
+      ],
+      [
+        2,
+        251
+      ],
+      [
+        3,
+        244
+      ],
+      [
+        4,
+        221
+      ],
+      [
+        5,
+        258
+      ]
+    ]
+  },
+  {
+    "tarih": "2026-04-28 17:38",
+    "zorluk": "Orta",
+    "mod": 0,
+    "ad": "Şevval",
+    "yas": "24",
+    "cinsiyet": "Kadın",
+    "ortalama": 245.4,
+    "en_hizli": 181,
+    "en_yavas": 402,
+    "sinif": "Iyi",
+    "denemeler": [
+      [
+        1,
+        402
+      ],
+      [
+        2,
+        231
+      ],
+      [
+        3,
+        189
+      ],
+      [
+        4,
+        224
+      ],
+      [
+        5,
+        181
+      ]
+    ]
+  },
+  {
+    "tarih": "2026-04-28 17:42",
+    "zorluk": "Orta",
+    "mod": 0,
+    "ad": "Zeynep",
+    "yas": "13",
+    "cinsiyet": "Kadın",
+    "ortalama": 367.8,
+    "en_hizli": 262,
+    "en_yavas": 537,
+    "sinif": "Orta",
+    "denemeler": [
+      [
+        1,
+        537
+      ],
+      [
+        2,
+        368
+      ],
+      [
+        3,
+        262
+      ],
+      [
+        4,
+        338
+      ],
+      [
+        5,
+        334
+      ]
+    ]
+  },
+  {
+    "tarih": "2026-04-28 17:49",
+    "zorluk": "Zor",
+    "mod": 0,
+    "ad": "Hatice",
+    "yas": "25",
+    "cinsiyet": "Kadın",
+    "ortalama": 222.2,
+    "en_hizli": 176,
+    "en_yavas": 280,
+    "sinif": "Iyi",
+    "denemeler": [
+      [
+        1,
+        234
+      ],
+      [
+        2,
+        234
+      ],
+      [
+        3,
+        187
+      ],
+      [
+        4,
+        176
+      ],
+      [
+        5,
+        280
+      ]
+    ]
+  },
+  {
+    "tarih": "2026-04-28 18:06",
+    "zorluk": "Orta",
+    "mod": 0,
+    "ad": "Büşra",
+    "yas": "",
+    "cinsiyet": "Kadın",
+    "ortalama": 291.8,
+    "en_hizli": 265,
+    "en_yavas": 337,
+    "sinif": "Iyi",
+    "denemeler": [
+      [
+        1,
+        -2
+      ],
+      [
+        2,
+        274
+      ],
+      [
+        3,
+        291
+      ],
+      [
+        4,
+        337
+      ],
+      [
+        5,
+        265
+      ]
+    ]
+  },
+  {
+    "tarih": "2026-04-29 17:01",
+    "zorluk": "Orta",
+    "mod": 0,
+    "ad": "Büşra",
+    "yas": "26",
+    "cinsiyet": "Kadın",
+    "ortalama": 428.0,
+    "en_hizli": 279,
+    "en_yavas": 915,
+    "sinif": "Kotu",
+    "denemeler": [
+      [
+        1,
+        915
+      ],
+      [
+        2,
+        289
+      ],
+      [
+        3,
+        365
+      ],
+      [
+        4,
+        292
+      ],
+      [
+        5,
+        279
+      ]
+    ]
+  },
+  {
+    "tarih": "2026-04-29 18:11",
+    "zorluk": "Zor",
+    "mod": 0,
+    "ad": "Yağmur",
+    "yas": "22",
+    "cinsiyet": "Kadın",
+    "ortalama": 176.4,
+    "en_hizli": 155,
+    "en_yavas": 200,
+    "sinif": "Mukemmel",
+    "denemeler": [
+      [
+        1,
+        196
+      ],
+      [
+        2,
+        175
+      ],
+      [
+        3,
+        200
+      ],
+      [
+        4,
+        155
+      ],
+      [
+        5,
+        156
+      ]
+    ]
+  },
+  {
+    "ad": "Efe2",
+    "yas": "14",
+    "cinsiyet": "Erkek",
+    "ortalama": 193.0,
+    "en_hizli": 170,
+    "en_yavas": 226,
+    "zorluk": "Zor",
+    "mod": 0,
+    "sinif": "Mukemmel",
+    "tarih": "2026-04-29 18:14",
+    "ip": "127.0.0.1"
+  }
+]

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RÖÇ - Refleks Ölçüm Sistemi | Liderlik Tablosu</title>
+    <!-- PDF & Screenshot kütüphaneleri -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
+            background: #F5F5F7;
+            color: #1D1D1F;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #1D1D1F;
+        }
+
+        h1 span {
+            color: #007AFF;
+        }
+
+        .subtitle {
+            color: #86868B;
+            font-size: 1.1em;
+            margin-top: 5px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 15px 25px;
+            background: #F5F5F7;
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #007AFF;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #86868B;
+            margin-top: 5px;
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #1D1D1F;
+        }
+
+        select, input[type="number"] {
+            padding: 10px 15px;
+            border: 2px solid #E5E5EA;
+            border-radius: 8px;
+            font-size: 1em;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        select:hover, input[type="number"]:hover {
+            border-color: #007AFF;
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #007AFF;
+            box-shadow: 0 0 0 3px rgba(0,122,255,0.1);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: #5AC8FA;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,122,255,0.3);
+        }
+
+        /* Leaderboard */
+        .leaderboard {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .leaderboard-header {
+            background: #007AFF;
+            color: white;
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #F5F5F7;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #86868B;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #E5E5EA;
+        }
+
+        tr:hover {
+            background: #F5F5F7;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .rank {
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .rank-1 { color: #FF9500; }
+        .rank-2 { color: #86868B; }
+        .rank-3 { color: #CD7F32; }
+
+        .score {
+            font-weight: 700;
+            color: #007AFF;
+            font-size: 1.1em;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .level-mukemmel {
+            background: #34C759;
+            color: white;
+        }
+
+        .level-iyi {
+            background: #007AFF;
+            color: white;
+        }
+
+        .level-orta {
+            background: #FFCC00;
+            color: #1D1D1F;
+        }
+
+        .level-kotu {
+            background: #FF3B30;
+            color: white;
+        }
+
+        .difficulty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .difficulty-emoji {
+            font-size: 1.3em;
+        }
+
+        .difficulty-easy { color: #34C759; }
+        .difficulty-medium { color: #FFCC00; }
+        .difficulty-hard { color: #FF3B30; }
+
+        /* No Data */
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #86868B;
+        }
+
+        .no-data-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .no-data h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .stats {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #E5E5EA;
+            border-top: 4px solid #007AFF;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #34C759;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        /* Aksiyon butonları */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .btn-screenshot {
+            background: #5856D6;
+        }
+        .btn-screenshot:hover {
+            background: #7B79E0;
+        }
+
+        .btn-pdf {
+            background: #FF3B30;
+        }
+        .btn-pdf:hover {
+            background: #FF6961;
+        }
+
+        .btn-share {
+            background: #34C759;
+        }
+        .btn-share:hover {
+            background: #5DD879;
+        }
+
+        /* PDF için gizli tablo stili */
+        @media print {
+            .filters, .action-buttons, header .stats { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>R<span>Ö</span>Ç</h1>
+                <div class="subtitle">Refleks Ölçüm Sistemi - Liderlik Tablosu</div>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="totalPlayers">0</div>
+                    <div class="stat-label">Toplam Oyuncu</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="totalTests">0</div>
+                    <div class="stat-label">Toplam Test</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="bestScore">-</div>
+                    <div class="stat-label">En İyi Skor</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Cinsiyet</label>
+                    <select id="filterGender">
+                        <option value="all">Tümü</option>
+                        <option value="E">Erkek</option>
+                        <option value="K">Kadın</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Zorluk</label>
+                    <select id="filterDifficulty">
+                        <option value="all">Tümü</option>
+                        <option value="Kolay">Kolay</option>
+                        <option value="Orta">Orta</option>
+                        <option value="Zor">Zor</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Mod</label>
+                    <select id="filterMode">
+                        <option value="all">Tümü</option>
+                        <option value="0">Klasik</option>
+                        <option value="1">Buzzer</option>
+                        <option value="2">Renk</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Yaş (Min)</label>
+                    <input type="number" id="ageMin" value="0" min="0" max="100">
+                </div>
+                <div class="filter-group">
+                    <label>Yaş (Max)</label>
+                    <input type="number" id="ageMax" value="100" min="0" max="100">
+                </div>
+                <div class="filter-group">
+                    <label>Sıralama</label>
+                    <select id="sortBy">
+                        <option value="score">Skor (En İyi)</option>
+                        <option value="name">İsim (A-Z)</option>
+                        <option value="age">Yaş</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="applyFilters()">Filtrele</button>
+                <button class="btn" style="background: #34C759;" onclick="checkServer()">🔄 Sunucu Kontrol</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="leaderboard">
+            <div class="leaderboard-header">
+                🏆 Liderlik Tablosu
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sıra</th>
+                        <th>İsim</th>
+                        <th>Yaş</th>
+                        <th>Cinsiyet</th>
+                        <th>Zorluk</th>
+                        <th>Ortalama</th>
+                        <th>En Hızlı</th>
+                        <th>Seviye</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <tr>
+                        <td colspan="9" class="no-data">
+                            <div class="no-data-icon">📊</div>
+                            <h3>Henüz veri yok</h3>
+                            <p>Demo veri yüklemek için "Demo Veri Yükle" butonuna tıklayın</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // API URL
+        const API_URL = 'http://localhost:5000/api';
+        
+        // Data
+        let allData = [];
+        let filteredData = [];
+
+        // Sayfa yüklendiğinde verileri getir
+        window.addEventListener('load', async () => {
+            await checkServer();
+            await loadScores();
+        });
+
+        // Sunucu kontrol
+        async function checkServer() {
+            try {
+                const response = await fetch(`${API_URL}/istatistikler`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    showToast('✅ Sunucu aktif!');
+                    document.getElementById('totalPlayers').textContent = result.total_players;
+                    document.getElementById('totalTests').textContent = result.total_tests;
+                    document.getElementById('bestScore').textContent = result.best_score ? result.best_score + ' ms' : '-';
+                }
+            } catch (error) {
+                showToast('❌ Sunucu bağlantısı yok! server.py çalıştırın.');
+            }
+        }
+
+        // Skorları yükle
+        async function loadScores() {
+            try {
+                const response = await fetch(`${API_URL}/skorlar`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    allData = result.data;
+                    filteredData = [...allData];
+                    updateLeaderboard();
+                    
+                    if (allData.length === 0) {
+                        showToast('💡 Henüz veri yok. GUI\'den test yapın!');
+                    }
+                }
+            } catch (error) {
+                console.error('Veri yükleme hatası:', error);
+                showToast('❌ Sunucuya bağlanılamadı!');
+            }
+        }
+
+        // Demo Veri Yükle
+        async function loadTestData() {
+            const names = [
+                "Ahmet","Mehmet","Ali","Ayşe","Fatma","Zeynep","Mustafa","Emre","Burak","Can",
+                "Deniz","Ece","Ege","Elif","Gizem","Gorkem","Hakan","Irem","Kaan","Kerem",
+                "Leyla","Mert","Müge","Nazan","Oguz","Onur","Pelin","Rıza","Seda","Selin",
+                "Tamer","Tolga","Ugur","Ümit","Volkan","Yasin","Zeki","Ayla","Berk","Cem",
+                "Derya","Ebru","Ferhat","Gamze","Hüseyin","Ibrahim","Jale","Kemal","Lale","Murat"
+            ];
+            
+            const difficulties = ["Kolay", "Orta", "Zor"];
+            const difficultiesEmoji = {"Kolay": "🌱", "Orta": "⚡", "Zor": "🔥"};
+            const modes = ["Klasik", "Buzzer", "Renk"];
+            
+            allData = [];
+            
+            for (let i = 0; i < 50; i++) {
+                const difficulty = difficulties[Math.floor(Math.random() * difficulties.length)];
+                const avg = Math.floor(Math.random() * 400) + 150;
+                const fastest = avg - Math.floor(Math.random() * 100);
+                const mode = Math.floor(Math.random() * 3);
+                
+                let level, levelClass;
+                if (avg < 200) {
+                    level = "Mükemmel";
+                    levelClass = "level-mukemmel";
+                } else if (avg < 300) {
+                    level = "İyi";
+                    levelClass = "level-iyi";
+                } else if (avg < 400) {
+                    level = "Orta";
+                    levelClass = "level-orta";
+                } else {
+                    level = "Kötü";
+                    levelClass = "level-kotu";
+                }
+                
+                const gender = Math.random() > 0.5 ? "E" : "K";
+                const age = Math.floor(Math.random() * 40) + 10;
+                
+                // Sunucuya gönder
+                await fetch(`${API_URL}/skor`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ad: names[i % names.length],
+                        yas: age,
+                        cinsiyet: gender,
+                        ortalama: avg,
+                        en_hizli: fastest,
+                        zorluk: difficulty,
+                        mod: mode,
+                        sinif: level
+                    })
+                });
+            }
+            
+            // Verileri tekrar yükle
+            await loadScores();
+            showToast("✅ 50 demo veri yüklendi!");
+        }
+
+        // Update Leaderboard
+        function updateLeaderboard() {
+            const tbody = document.getElementById('leaderboardBody');
+            
+            if (filteredData.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="9" class="no-data">
+                            <div class="no-data-icon">📊</div>
+                            <h3>Veri bulunamadı</h3>
+                            <p>Filtreleri değiştirmeyi deneyin</p>
+                        </td>
+                    </tr>
+                `;
+                updateStats();
+                return;
+            }
+            
+            tbody.innerHTML = filteredData.map((item, index) => {
+                const rank = index + 1;
+                let rankClass = '';
+                if (rank === 1) rankClass = 'rank-1';
+                else if (rank === 2) rankClass = 'rank-2';
+                else if (rank === 3) rankClass = 'rank-3';
+                
+                const genderText = item.cinsiyet === 'E' ? 'Erkek' : 'Kadın';
+                const modeText = ['Klasik', 'Buzzer', 'Renk'][item.mod || 0];
+                const difficultyClass = item.zorluk === 'Kolay' ? 'difficulty-easy' : 
+                                       item.zorluk === 'Orta' ? 'difficulty-medium' : 'difficulty-hard';
+                
+                return `
+                    <tr>
+                        <td class="rank ${rankClass}">#${rank}</td>
+                        <td><strong>${item.ad}</strong></td>
+                        <td>${item.yas}</td>
+                        <td>${genderText}</td>
+                        <td>
+                            <div class="difficulty">
+                                <span class="difficulty-emoji ${difficultyClass}">${getDifficultyEmoji(item.zorluk)}</span>
+                                ${item.zorluk}
+                            </div>
+                        </td>
+                        <td class="score">${item.ortalama} ms</td>
+                        <td>${item.en_hizli} ms</td>
+                        <td><span class="level-badge ${item.levelClass || ''}">${item.sinif}</span></td>
+                        <td>${item.tarih}</td>
+                    </tr>
+                `;
+            }).join('');
+            
+            updateStats();
+        }
+
+        function getDifficultyEmoji(difficulty) {
+            const emojis = {"Kolay": "🌱", "Orta": "⚡", "Zor": "🔥"};
+            return emojis[difficulty] || "";
+        }
+        // Update Statistics
+        function updateStats() {
+            document.getElementById('totalPlayers').textContent = allData.length;
+            document.getElementById('totalTests').textContent = allData.length;
+            
+            if (allData.length > 0) {
+                const best = Math.min(...allData.map(d => d.ortalama));
+                document.getElementById('bestScore').textContent = best + ' ms';
+            }
+        }
+
+        // Apply Filters
+        function applyFilters() {
+            const gender = document.getElementById('filterGender').value;
+            const difficulty = document.getElementById('filterDifficulty').value;
+            const mode = document.getElementById('filterMode').value;
+            const ageMin = parseInt(document.getElementById('ageMin').value) || 0;
+            const ageMax = parseInt(document.getElementById('ageMax').value) || 100;
+            const sortBy = document.getElementById('sortBy').value;
+            
+            filteredData = allData.filter(item => {
+                if (gender !== 'all' && item.cinsiyet !== gender) return false;
+                if (difficulty !== 'all' && item.zorluk !== difficulty) return false;
+                if (mode !== 'all' && (item.mod || 0) !== parseInt(mode)) return false;
+                if (parseInt(item.yas) < ageMin || parseInt(item.yas) > ageMax) return false;
+                return true;
+            });
+            
+            // Sort
+            filteredData.sort((a, b) => {
+                if (sortBy === 'score') return a.ortalama - b.ortalama;
+                if (sortBy === 'name') return a.ad.localeCompare(b.ad);
+                if (sortBy === 'age') return parseInt(a.yas) - parseInt(b.yas);
+                return 0;
+            });
+            
+            updateLeaderboard();
+            showToast(`✅ ${filteredData.length} sonuç bulundu!`);
+        }
+
+        // Show Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Load data on page load
+        // Otomatik yükleniyor (window.addEventListener)
+    </script>
+</body>
+</html>
