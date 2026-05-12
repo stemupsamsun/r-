@@ -6,7 +6,8 @@ import qrcode
 app = Flask(__name__)
 CORS(app)
 
-DATA_FILE = os.path.join(os.path.dirname(__file__), 'web_veriler.json')
+DATA_FILE = os.path.join(os.path.dirname(__file__), 'data', 'web_veriler.json')
+
 
 @app.route('/')
 def home():
