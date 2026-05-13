@@ -1,12 +1,11 @@
 from flask import Flask, render_template, jsonify, send_file, request
 from flask_cors import CORS
-CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 import json, os, io
 import qrcode
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'data', 'web_veriler.json')
 
