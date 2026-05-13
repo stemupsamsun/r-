@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, send_file, request
-from flask_cors import CORS, request
+from flask_cors import CORS
 import json, os, io
 import qrcode
 
@@ -7,7 +7,6 @@ app = Flask(__name__)
 CORS(app)
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'data', 'web_veriler.json')
-
 
 @app.route('/')
 def home():
